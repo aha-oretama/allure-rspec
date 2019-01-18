@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'rspec', '~> 3.5'
   s.add_dependency 'allure-ruby-adaptor-api', '0.7.0'
+  s.add_dependency 'turnip', '~> 3.0'
 
   s.add_development_dependency 'bundler'
   s.add_development_dependency 'rake'
