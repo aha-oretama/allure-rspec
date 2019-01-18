@@ -6,7 +6,7 @@ module AllureRSpec
 
   class Formatter < RSpec::Core::Formatters::BaseFormatter
 
-    NOTIFICATIONS = [:example_group_started, :example_group_finished, :example_started,
+    NOTIFICATIONS = [:example_group_started, :example_group_finished,
                      :example_failed, :example_passed, :example_pending, :start, :stop]
     ALLOWED_LABELS = [:feature, :story, :severity, :language, :framework, :issue, :testId, :host, :thread]
 
@@ -17,11 +17,19 @@ module AllureRSpec
     end
 
     def example_group_finished(notification)
-      AllureRubyAdaptorApi::Builder.stop_suite(description(notification.group).to_s)
+      if notification.group.examples.empty? # Feature has no examples
+        AllureRubyAdaptorApi::Builder.stop_suite(notification.group.description)
+      end
     end
 
     def example_group_started(notification)
-      AllureRubyAdaptorApi::Builder.start_suite(description(notification.group).to_s, labels(notification))
+      if notification.group.examples.empty? # Feature has no examples
+        AllureRubyAdaptorApi::Builder.start_suite(notification.group.description, labels(notification))
+      else # Scenario has examples
+        suite = notification.group.parent_groups.last.description
+        test = notification.group.description
+        AllureRubyAdaptorApi::Builder.start_test(suite, test, labels(notification))
+      end
     end
 
     def example_passed(notification)
@@ -30,12 +38,6 @@ module AllureRSpec
 
     def example_pending(notification)
       stop_test(notification.example)
-    end
-
-    def example_started(notification)
-      suite = description(notification.example.example_group).to_s
-      test = description(notification.example).to_s
-      AllureRubyAdaptorApi::Builder.start_test(suite, test, labels(notification))
     end
 
     def start(example_count)
@@ -53,17 +55,11 @@ module AllureRSpec
 
     private
 
-    def description(data, attr = :full_description)
-      ((((data.respond_to?(attr)) ?
-          data.send(attr) : data.metadata[attr]) ||
-          description(data, :description)) || '').strip
-    end
-
     def stop_test(example, opts = {})
       res = example.execution_result
       AllureRubyAdaptorApi::Builder.stop_test(
-          description(example.example_group).to_s,
-          (example.metadata[:description_args].size== 0) ? description(example.example_group) : description(example).to_s,
+          example.example_group.parent_groups.last.description,
+          example.example_group.description,
           {
               :status => res.status,
               :finished_at => res.finished_at,

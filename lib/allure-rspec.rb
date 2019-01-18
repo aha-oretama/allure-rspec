@@ -4,6 +4,7 @@ require 'allure-rspec/formatter'
 require 'allure-rspec/adaptor'
 require 'allure-rspec/dsl'
 require 'allure-rspec/hooks'
+require 'allure-rspec/turnip_extension'
 
 module AllureRSpec
   module Config
