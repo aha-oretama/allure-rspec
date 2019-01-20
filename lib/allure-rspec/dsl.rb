@@ -31,7 +31,11 @@ module AllureRSpec
       private
 
       def suite
-        metadata[:example_group][:parent_example_group][:description]
+        if AllureRSpec::Config.with_filename?
+          "#{File.split(metadata[:example_group][:parent_example_group][:file_path])[1]} -> #{metadata[:example_group][:parent_example_group][:description]}"
+        else
+          metadata[:example_group][:parent_example_group][:description]
+        end
       end
 
       def test
@@ -47,7 +51,7 @@ module AllureRSpec
       end
 
       def __with_step(step, &block)
-        __mutex.synchronize do
+        # __mutex.synchronize do
           begin
             @@__current_step = step
             AllureRSpec.context.rspec.hooks.send :run, :before, :step, self
@@ -56,7 +60,7 @@ module AllureRSpec
             AllureRSpec.context.rspec.hooks.send :run, :after, :step, self
             @@__current_step = nil
           end
-        end
+        # end
       end
     end
   end

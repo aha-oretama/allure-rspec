@@ -18,13 +18,13 @@ module AllureRSpec
 
     def example_group_finished(notification)
       if notification.group.examples.empty? # Feature has no examples
-        AllureRubyAdaptorApi::Builder.stop_suite(notification.group.description)
+        AllureRubyAdaptorApi::Builder.stop_suite(suite(notification.group))
       end
     end
 
     def example_group_started(notification)
       if notification.group.examples.empty? # Feature has no examples
-        AllureRubyAdaptorApi::Builder.start_suite(notification.group.description, labels(notification))
+        AllureRubyAdaptorApi::Builder.start_suite(suite(notification.group), labels(notification))
       else # Scenario has examples
         suite = suite(notification.group)
         test = test(notification.group)
@@ -69,7 +69,11 @@ module AllureRSpec
     end
 
     def suite(group)
-      group.parent_groups.last.description
+      if AllureRSpec::Config.with_filename?
+        "#{File.split(group.parent_groups.last.metadata[:file_path])[1]} -> #{group.parent_groups.last.description}"
+      else
+        group.parent_groups.last.description
+      end
     end
 
     def test(group)

@@ -18,5 +18,6 @@ end
 
 AllureRSpec.configure do |c|
   c.output_dir = "allure"
+  c.with_filename = true
 end
 
