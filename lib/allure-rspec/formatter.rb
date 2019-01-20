@@ -26,8 +26,8 @@ module AllureRSpec
       if notification.group.examples.empty? # Feature has no examples
         AllureRubyAdaptorApi::Builder.start_suite(notification.group.description, labels(notification))
       else # Scenario has examples
-        suite = notification.group.parent_groups.last.description
-        test = notification.group.description
+        suite = suite(notification.group)
+        test = test(notification.group)
         AllureRubyAdaptorApi::Builder.start_test(suite, test, labels(notification))
       end
     end
@@ -58,14 +58,22 @@ module AllureRSpec
     def stop_test(example, opts = {})
       res = example.execution_result
       AllureRubyAdaptorApi::Builder.stop_test(
-          example.example_group.parent_groups.last.description,
-          example.example_group.description,
+          suite(example.example_group),
+          test(example.example_group),
           {
               :status => res.status,
               :finished_at => res.finished_at,
               :started_at => res.started_at
           }.merge(opts)
       )
+    end
+
+    def suite(group)
+      group.parent_groups.last.description
+    end
+
+    def test(group)
+      group.metadata[:full_description]
     end
 
     def metadata(example_or_group)
