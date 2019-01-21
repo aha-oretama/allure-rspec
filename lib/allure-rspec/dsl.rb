@@ -51,16 +51,20 @@ module AllureRSpec
       end
 
       def __with_step(step, &block)
-        # __mutex.synchronize do
-          begin
+        begin
+          locked = __mutex.try_lock
+          if locked
             @@__current_step = step
             AllureRSpec.context.rspec.hooks.send :run, :before, :step, self
             yield self
-          ensure
+          end
+        ensure
+          if locked
             AllureRSpec.context.rspec.hooks.send :run, :after, :step, self
             @@__current_step = nil
+            __mutex.unlock
           end
-        # end
+        end
       end
     end
   end
