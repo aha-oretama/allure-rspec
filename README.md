@@ -1,20 +1,21 @@
-# Allure RSpec Adaptor
+# Allure Turnip
 
 [![Gem Version](https://badge.fury.io/rb/allure-rspec.svg)](http://badge.fury.io/rb/allure-rspec)
 
-Adaptor to use the Allure framework along with the RSpec. See [an example](https://github.com/allure-examples/allure-rspec-example) project to take a quick tour.
+Adaptor to use the Allure framework along with the Turnip.
 
 ## What's new
 
-See the [releases](https://github.com/allure-framework/allure-rspec/releases) tab.
+See the [releases](https://github.com/aha-oretama/allure-turnip/releases) tab.
 
 
 ## Setup
 
 Add the dependency to your Gemfile. Choose the version carefully:
-* 0.5.x - for RSpec2.
-* <= 0.6.7 - for RSpec < 3.2.
-* >= 0.6.9 - for RSpec >= 3.2.
+
+| Allure Turnip | Turnip |
+| ------------- | ------ |
+| >= 0.1.x | >= 3.0 |
 
 ```ruby
  gem 'allure-turnip'
@@ -33,44 +34,35 @@ And then include it in your spec_helper.rb:
 ## Advanced options
 
 You can specify the directory where the Allure test results will appear. By default it would be 'gen/allure-results'
-within your current directory.
+within your current directory.  
+When you add a `feature_with_filename` option, you can add file name in feature as a prefix.  
+This options is useful if you have some same feature names. Because Allure overwrites the same feature name's result if there are some feature name.
 
 ```ruby
     AllureRSpec.configure do |c|
       c.output_dir = "/whatever/you/like" # default: gen/allure-results
       c.clean_dir = false # clean the output directory first? (default: true)
       c.logging_level = Logger::DEBUG # logging level (default: DEBUG)
+      c.feature_with_filename = true # default: false
     end
 ```
 
+## DSL
+In your *step* method, you can call `attach_file` method.
+The method attaches the file in the Allure result.
+
 ## Usage examples
 
+**feature**
 ```ruby
-describe MySpec, :feature => "Some feature", :severity => :normal do
+Feature: Attach File
+  Scenario: This is an attaching file feature
+    Given attach file
+```
 
-  before(:step) do |s|
-    puts "Before step #{s.current_step}"
-  end
-
-  it "should be critical", :story => "First story", :severity => :critical, :testId => 99 do
-    "string".should == "string"
-  end
-
-  it "should be steps enabled", :story => ["First story", "Second story"], :testId => 31 do |e|
-
-    e.step "step1" do |s|
-      s.attach_file "screenshot1", take_screenshot_as_file
-    end
-
-    e.step "step2" do
-      5.should be > 0
-    end
-
-    e.step "step3" do
-      0.should == 0
-    end
-
-    e.attach_file "screenshot2", take_screenshot_as_file
-  end
+**steps**
+```ruby
+step 'attach file' do
+  attach_file "test-file1", Tempfile.new("test")
 end
 ```

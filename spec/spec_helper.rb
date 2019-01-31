@@ -18,6 +18,6 @@ end
 
 AllureTurnip.configure do |c|
   c.output_dir = "allure"
-  c.with_filename = true
+  c.feature_with_filename = true
 end
 

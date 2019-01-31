@@ -12,11 +12,11 @@ module AllureTurnip
       attr_accessor :output_dir
       attr_accessor :clean_dir
       attr_accessor :logging_level
-      attr_accessor :with_filename
+      attr_accessor :feature_with_filename
 
       DEFAULT_OUTPUT_DIR = 'gen/allure-results'
       DEFAULT_LOGGING_LEVEL = Logger::DEBUG
-      DEFAULT_WITH_FILENAME = false
+      DEFAULT_FEATURE_WITH_FILENAME = false
 
       def output_dir
         @output_dir || DEFAULT_OUTPUT_DIR
@@ -30,8 +30,8 @@ module AllureTurnip
         @logging_level || DEFAULT_LOGGING_LEVEL
       end
 
-      def with_filename?
-        @with_filename || DEFAULT_WITH_FILENAME
+      def feature_with_filename?
+        @feature_with_filename || DEFAULT_FEATURE_WITH_FILENAME
       end
     end
   end

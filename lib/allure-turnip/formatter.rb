@@ -85,7 +85,7 @@ module AllureTurnip
     end
 
     def suite(group)
-      if AllureTurnip::Config.with_filename?
+      if AllureTurnip::Config.feature_with_filename?
         "#{File.split(group.parent_groups.last.metadata[:file_path])[1]} -> #{group.parent_groups.last.description}"
       else
         group.parent_groups.last.description

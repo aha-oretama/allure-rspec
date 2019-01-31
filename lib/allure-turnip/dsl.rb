@@ -31,7 +31,7 @@ module AllureTurnip
       private
 
       def __suite
-        if AllureTurnip::Config.with_filename?
+        if AllureTurnip::Config.feature_with_filename?
           "#{File.split(metadata[:example_group][:parent_example_group][:file_path])[1]} -> #{metadata[:example_group][:parent_example_group][:description]}"
         else
           metadata[:example_group][:parent_example_group][:description]
