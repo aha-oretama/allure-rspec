@@ -16,7 +16,9 @@ module AllureTurnip
       ex = notification.example.execution_result.exception
       status = ex.is_a?(RSpec::Expectations::ExpectationNotMetError) ? :failed : :broken
       formatter = RSpec.configuration.backtrace_formatter
-      ex.set_backtrace(formatter.format_backtrace(ex.backtrace, notification.example.metadata))
+      formatter.exclusion_patterns.push /lib\/allure-turnip/
+      backtrace = formatter.format_backtrace(ex.backtrace, notification.example.metadata)
+      ex.set_backtrace(backtrace)
       stop_test(notification.example, :exception => ex, :status => status)
     end
 
