@@ -11,6 +11,8 @@ module AllureRSpec
     ALLOWED_LABELS = [:feature, :story, :severity, :language, :framework, :issue, :testId, :host, :thread]
 
     def example_failed(notification)
+      return unless turnip?(notification)
+
       ex = notification.example.execution_result.exception
       status = ex.is_a?(RSpec::Expectations::ExpectationNotMetError) ? :failed : :broken
       formatter = RSpec.configuration.backtrace_formatter
@@ -19,12 +21,16 @@ module AllureRSpec
     end
 
     def example_group_finished(notification)
+      return unless turnip?(notification)
+
       if notification.group.examples.empty? # Feature has no examples
         AllureRubyAdaptorApi::Builder.stop_suite(suite(notification.group))
       end
     end
 
     def example_group_started(notification)
+      return unless turnip?(notification)
+
       if notification.group.examples.empty? # Feature has no examples
         AllureRubyAdaptorApi::Builder.start_suite(suite(notification.group), labels(notification))
       else # Scenario has examples
@@ -35,10 +41,14 @@ module AllureRSpec
     end
 
     def example_passed(notification)
+      return unless turnip?(notification)
+
       stop_test(notification.example)
     end
 
     def example_pending(notification)
+      return unless turnip?(notification)
+
       stop_test(notification.example)
     end
 
@@ -56,6 +66,10 @@ module AllureRSpec
     end
 
     private
+
+    def turnip?(notification)
+      metadata(notification)[:turnip]
+    end
 
     def stop_test(example, opts = {})
       res = example.execution_result
