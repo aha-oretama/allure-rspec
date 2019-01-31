@@ -1,3 +1,5 @@
+require 'tempfile'
+
 step "there is a monster" do
   @monster = 1
 end
