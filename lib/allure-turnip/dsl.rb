@@ -12,25 +12,25 @@ module AllureTurnip
         end
       end
 
-      def step(step, &block)
+      def allure_step(step, &block)
         begin
-          AllureRubyAdaptorApi::Builder.start_step(suite, test, step)
+          AllureRubyAdaptorApi::Builder.start_step(__suite, __test, step)
           __with_step step, &block
-          AllureRubyAdaptorApi::Builder.stop_step(suite, test, step)
+          AllureRubyAdaptorApi::Builder.stop_step(__suite, __test, step)
         rescue Exception => e
-          AllureRubyAdaptorApi::Builder.stop_step(suite, test, step, :failed)
+          AllureRubyAdaptorApi::Builder.stop_step(__suite, __test, step, :failed)
           raise e
         end
       end
 
       def attach_file(title, file, opts = {})
         step = current_step
-        AllureRubyAdaptorApi::Builder.add_attachment suite, test, opts.merge(:title => title, :file => file, :step => step)
+        AllureRubyAdaptorApi::Builder.add_attachment __suite, __test, opts.merge(:title => title, :file => file, :step => step)
       end
 
       private
 
-      def suite
+      def __suite
         if AllureTurnip::Config.with_filename?
           "#{File.split(metadata[:example_group][:parent_example_group][:file_path])[1]} -> #{metadata[:example_group][:parent_example_group][:description]}"
         else
@@ -38,7 +38,7 @@ module AllureTurnip
         end
       end
 
-      def test
+      def __test
         metadata[:example_group][:full_description]
       end
 
