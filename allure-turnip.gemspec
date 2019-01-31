@@ -1,15 +1,15 @@
 # -*- encoding: utf-8 -*-
 $LOAD_PATH.unshift File.expand_path("../lib", __FILE__)
-require "allure-rspec/version"
+require "allure-turnip/version"
 
 Gem::Specification.new do |s|
-  s.name          = 'allure-rspec'
-  s.version       = AllureRSpec::Version::STRING
-  s.platform         = Gem::Platform::RUBY
-  s.authors       = ['Ilya Sadykov']
-  s.email         = ['smecsia@yandex-team.ru']
-  s.description   = %q{Adaptor to use Allure framework along with the RSpec 2}
-  s.summary       = "allure-rspec-#{AllureRSpec::Version::STRING}"
+  s.name          = 'allure-turnip'
+  s.version       = AllureTurnip::Version::STRING
+  s.platform      = Gem::Platform::RUBY
+  s.authors       = ['aha-oretama']
+  s.email         = ['sekine_y_529@msn.com']
+  s.description   = %q{Adaptor to use Allure framework along with the Turnip}
+  s.summary       = "allure-turnip-#{AllureTurnip::Version::STRING}"
   s.homepage      = 'http://allure.qatools.ru'
   s.license       = 'Apache-2.0'
 

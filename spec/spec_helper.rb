@@ -1,12 +1,12 @@
 require 'rspec'
-require 'allure-rspec'
+require_relative '../lib/allure-turnip'
 require 'nokogiri'
 require 'turnip'
 
 Dir.glob("spec/steps/**/*steps.rb") { |f| load f, true }
 
 RSpec.configure do |c|
-  c.include AllureRSpec::Adaptor
+  c.include AllureTurnip::Adaptor
   c.before(:suite) do
     puts 'Before Suite Spec helper'
   end
@@ -16,7 +16,7 @@ RSpec.configure do |c|
   end
 end
 
-AllureRSpec.configure do |c|
+AllureTurnip.configure do |c|
   c.output_dir = "allure"
   c.with_filename = true
 end

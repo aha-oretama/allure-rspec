@@ -1,6 +1,6 @@
 require 'digest'
 require 'mimemagic'
-module AllureRSpec
+module AllureTurnip
   module DSL
     module Example
 
@@ -31,7 +31,7 @@ module AllureRSpec
       private
 
       def suite
-        if AllureRSpec::Config.with_filename?
+        if AllureTurnip::Config.with_filename?
           "#{File.split(metadata[:example_group][:parent_example_group][:file_path])[1]} -> #{metadata[:example_group][:parent_example_group][:description]}"
         else
           metadata[:example_group][:parent_example_group][:description]
@@ -55,12 +55,12 @@ module AllureRSpec
           locked = __mutex.try_lock
           if locked
             @@__current_step = step
-            AllureRSpec.context.rspec.hooks.send :run, :before, :step, self
+            AllureTurnip.context.rspec.hooks.send :run, :before, :step, self
             yield self
           end
         ensure
           if locked
-            AllureRSpec.context.rspec.hooks.send :run, :after, :step, self
+            AllureTurnip.context.rspec.hooks.send :run, :after, :step, self
             @@__current_step = nil
             __mutex.unlock
           end

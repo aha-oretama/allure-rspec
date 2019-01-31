@@ -17,13 +17,13 @@ Add the dependency to your Gemfile. Choose the version carefully:
 * >= 0.6.9 - for RSpec >= 3.2.
 
 ```ruby
- gem 'allure-rspec'
+ gem 'allure-turnip'
 ```
 
 And then include it in your spec_helper.rb:
 
 ```ruby
-    require 'allure-rspec'
+    require 'allure-turnip'
 
     RSpec.configure do |c|
       c.include AllureRSpec::Adaptor

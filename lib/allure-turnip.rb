@@ -1,12 +1,12 @@
 require 'allure-ruby-adaptor-api'
-require 'allure-rspec/version'
-require 'allure-rspec/formatter'
-require 'allure-rspec/adaptor'
-require 'allure-rspec/dsl'
-require 'allure-rspec/hooks'
-require 'allure-rspec/turnip_extension'
+require 'allure-turnip/version'
+require 'allure-turnip/formatter'
+require 'allure-turnip/adaptor'
+require 'allure-turnip/dsl'
+require 'allure-turnip/hooks'
+require 'allure-turnip/turnip_extension'
 
-module AllureRSpec
+module AllureTurnip
   module Config
     class << self
       attr_accessor :output_dir

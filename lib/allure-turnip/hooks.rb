@@ -1,4 +1,4 @@
-module AllureRSpec
+module AllureTurnip
   module Hooks
 
     def self.included(cls)

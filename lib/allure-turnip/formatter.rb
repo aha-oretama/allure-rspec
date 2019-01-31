@@ -2,7 +2,7 @@ require 'rspec/core' unless defined?(RSpec::Core)
 require 'rspec/core/formatters/base_formatter' unless defined?(RSpec::Core::Formatters::BaseFormatter)
 require 'fileutils'
 
-module AllureRSpec
+module AllureTurnip
 
   class Formatter < RSpec::Core::Formatters::BaseFormatter
 
@@ -53,8 +53,8 @@ module AllureRSpec
     end
 
     def start(example_count)
-      dir = Pathname.new(AllureRSpec::Config.output_dir)
-      if AllureRSpec::Config.clean_dir?
+      dir = Pathname.new(AllureTurnip::Config.output_dir)
+      if AllureTurnip::Config.clean_dir?
         puts "Cleaning output directory '#{dir}'..."
         FileUtils.rm_rf(dir)
       end
@@ -85,7 +85,7 @@ module AllureRSpec
     end
 
     def suite(group)
-      if AllureRSpec::Config.with_filename?
+      if AllureTurnip::Config.with_filename?
         "#{File.split(group.parent_groups.last.metadata[:file_path])[1]} -> #{group.parent_groups.last.description}"
       else
         group.parent_groups.last.description

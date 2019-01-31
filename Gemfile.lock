@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    allure-rspec (0.8.0)
+    allure-turnip (0.1.0)
       allure-ruby-adaptor-api (= 0.7.0)
       rspec (~> 3.5)
       turnip (~> 3.0)
@@ -46,7 +46,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  allure-rspec!
+  allure-turnip!
   bundler
   rake
 
