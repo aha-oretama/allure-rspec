@@ -107,6 +107,10 @@ step "raise error" do
   raise "foobar"
 end
 
+step 'attach file' do
+  attach_file "test-file1", Tempfile.new("test")
+end
+
 placeholder :count do
   match (/\d+/) do |count|
     count.to_i
