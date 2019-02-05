@@ -1,5 +1,5 @@
 require 'rspec'
-require 'allure-turnip'
+require 'allure_turnip'
 require 'nokogiri'
 require 'turnip'
 

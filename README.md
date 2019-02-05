@@ -6,7 +6,7 @@ Adaptor to use the Allure framework along with the [Turnip](https://github.com/j
 
 ## What's new
 
-See the [releases](https://github.com/aha-oretama/allure-turnip/releases) tab.
+See the [releases](https://github.com/aha-oretama/allure_turnip/releases) tab.
 
 
 ## Setup
@@ -18,13 +18,13 @@ Add the dependency to your Gemfile. Choose the version carefully:
 | >= 0.1.x | >= 3.0 |
 
 ```ruby
- gem 'allure-turnip'
+ gem 'allure_turnip'
 ```
 
 And then include it in your spec_helper.rb:
 
 ```ruby
-    require 'allure-turnip'
+    require 'allure_turnip'
 
     RSpec.configure do |c|
       c.include AllureRSpec::Adaptor

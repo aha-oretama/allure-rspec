@@ -1,5 +1,6 @@
 require 'digest'
 require 'mimemagic'
+
 module AllureTurnip
   module DSL
     module Example

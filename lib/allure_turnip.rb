@@ -1,11 +1,11 @@
 require 'allure-ruby-adaptor-api'
 require 'turnip'
-require 'allure-turnip/version'
-require 'allure-turnip/formatter'
-require 'allure-turnip/adaptor'
-require 'allure-turnip/dsl'
-require 'allure-turnip/hooks'
-require 'allure-turnip/turnip_extension'
+require 'allure_turnip/version'
+require 'allure_turnip/formatter'
+require 'allure_turnip/adaptor'
+require 'allure_turnip/dsl'
+require 'allure_turnip/hooks'
+require 'allure_turnip/turnip_extension'
 
 module AllureTurnip
   module Config
