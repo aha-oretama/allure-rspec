@@ -2,7 +2,7 @@
 
 [![Gem Version](https://badge.fury.io/rb/allure-rspec.svg)](http://badge.fury.io/rb/allure-rspec)
 
-Adaptor to use the Allure framework along with the Turnip.
+Adaptor to use the Allure framework along with the [Turnip](https://github.com/jnicklas/turnip).
 
 ## What's new
 
@@ -35,8 +35,8 @@ And then include it in your spec_helper.rb:
 
 You can specify the directory where the Allure test results will appear. By default it would be 'gen/allure-results'
 within your current directory.  
-When you add a `feature_with_filename` option, you can add file name in feature as a prefix.  
-This options is useful if you have some same feature names. Because Allure overwrites the same feature name's result if there are some feature name.
+When you add a `feature_with_filename` option, the suites of the the Allure test results include file's name as a prefix.  
+This options is useful if you have some same feature names. Because Allure overwrites the same feature name's result if there are some same feature names.
 
 ```ruby
     AllureRSpec.configure do |c|
