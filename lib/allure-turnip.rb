@@ -1,4 +1,5 @@
 require 'allure-ruby-adaptor-api'
+require 'turnip'
 require 'allure-turnip/version'
 require 'allure-turnip/formatter'
 require 'allure-turnip/adaptor'
