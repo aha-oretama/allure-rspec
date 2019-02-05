@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.email         = ['sekine_y_529@msn.com']
   s.description   = %q{Adaptor to use Allure framework along with the Turnip}
   s.summary       = "allure-turnip-#{AllureTurnip::Version::STRING}"
-  s.homepage      = 'http://allure.qatools.ru'
+  s.homepage      = 'https://github.com/aha-oretama/allure-turnip'
   s.license       = 'Apache-2.0'
 
   s.files         = `git ls-files`.split("\n")

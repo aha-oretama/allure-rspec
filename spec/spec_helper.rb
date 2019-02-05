@@ -1,5 +1,5 @@
 require 'rspec'
-require_relative '../lib/allure-turnip'
+require 'allure-turnip'
 require 'nokogiri'
 require 'turnip'
 
