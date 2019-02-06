@@ -27,7 +27,7 @@ And then include it in your spec_helper.rb:
     require 'allure_turnip'
 
     RSpec.configure do |c|
-      c.include AllureRSpec::Adaptor
+      c.include AllureTurnip::Adaptor
     end
 ```
 
@@ -39,7 +39,7 @@ When you add a `feature_with_filename` option, the suites of the the Allure test
 This options is useful if you have some same feature names. Because Allure overwrites the same feature name's result if there are some same feature names.
 
 ```ruby
-    AllureRSpec.configure do |c|
+    AllureTurnip.configure do |c|
       c.output_dir = "/whatever/you/like" # default: gen/allure-results
       c.clean_dir = false # clean the output directory first? (default: true)
       c.logging_level = Logger::DEBUG # logging level (default: DEBUG)
