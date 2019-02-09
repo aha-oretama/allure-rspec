@@ -8,7 +8,7 @@ before_install:
   - gem update --system
   - gem --version
 
-script: skip
+script: bundle exec rspec
 
 deploy:
   provider: rubygems
