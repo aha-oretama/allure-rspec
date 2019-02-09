@@ -9,8 +9,6 @@ before_install:
   - gem install bundler
   - gem --version
 
-script: bundle exec rspec
-
 deploy:
   provider: rubygems
   api_key:
