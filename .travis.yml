@@ -1,0 +1,20 @@
+language: ruby
+rvm:
+  - 2.6.1
+  - 2.5.3
+  - 2.4.5
+
+before_install:
+  - gem update --system
+  - gem --version
+
+script: skip
+
+deploy:
+  provider: rubygems
+  api_key:
+    secure: QItGlGI6I0qamkYH/Bt+13p8Mhx2pqwCLlssTuDJWcUZ79E/fU6GfmbIOk4PYszpcp39tP7JaevJPdxYDvYe7yi8UPt1Ohxi26T3RE2vaKDTIjp15e2cPfsLGUT1Q0uGLNhnPOzUO9ZUzXGP6wSDeNCwPKZ9xzOEkwm04Epq2ky9QOo6C/jUAMI0HG0CjrGlGb3XqOmrSgIiem2RZLi06peyTDbmJlSqEM7i1uwOe1rlpThOw+L7h1pXypXOIgjEHgcUlR0ORgbq61S52MjXSi06Kkj06rO0/huzgSy1VEX3Y9JE9MwakNCURS6wg5eZkdBNdDxuTpkj4/pvO8uc+PqFkEOgbK5rJ1DGHRd4AmJQ4ZxxkVlTU0OnDZwmUuB6RuZuiS+bhfS/8m6xSvTgUo5WSVcCyK8nroKGrBGxNRrdhSBXWb6RM8yRHiwf0jexUPEYdsvM6qmmBmaGwmW49joz0/XLHUV+YTZAhWfzpNsSIkAMHXYxdxXx5nG0XTFufcLEARbDQxPKk6NN3x2PAMdm78ZLcgYRR4MXyJ4Un1fngpqN+k/Hz4kHR6jKqB+0+hlHkILpLzrd5CyFgzScr022+JKPKCKfyngsSo9IdvacvnJYnX96VXXVPPAJzAmN5HaD21Z3SgVajGr8AKTPSZQZ5qpGJKbYHou+nda1KgY=
+  on:
+    branch: master
+    tags: true
+    repo: aha-oretama/allure_turnip
