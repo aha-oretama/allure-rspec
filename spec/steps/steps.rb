@@ -110,7 +110,12 @@ step "raise error" do
 end
 
 step 'attach file' do
-  attach_file "test-file1", Tempfile.new("test")
+  random = Random.new(Time.now.usec)
+  file = "test-file#{random.rand(10000)}"
+  temp = Tempfile.new(file)
+  temp.print(file)
+  temp.close
+  attach_file file, temp
 end
 
 placeholder :count do
