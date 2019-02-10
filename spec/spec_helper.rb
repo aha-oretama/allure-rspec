@@ -19,5 +19,7 @@ end
 AllureTurnip.configure do |c|
   c.output_dir = "allure"
   c.feature_with_filename = true
+  c.tms_prefix      = '@HIPTEST--'
+  c.issue_prefix    = '@JIRA++'
 end
 
