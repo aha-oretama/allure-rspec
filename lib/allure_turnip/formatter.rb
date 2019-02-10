@@ -114,11 +114,27 @@ module AllureTurnip
           find_all { |value| !value[1].nil? }.
           inject({}) { |res, value| res.merge(value[0] => value[1]) }
       detect_feature_story(labels, example_or_group)
+      detect_tags(labels, example_or_group)
       labels
     end
 
     def method_or_key(metadata, key)
       metadata.respond_to?(key) ? metadata.send(key) : metadata[key]
+    end
+
+    def detect_tags(labels, example_or_group)
+      keys = metadata(example_or_group).keys
+      testId = abstract_tags(keys, AllureTurnip::Config.tms_prefix)
+      issue = abstract_tags(keys, AllureTurnip::Config.issue_prefix)
+      labels[:testId] = testId if testId
+      labels[:issue] = issue if issue
+    end
+
+    def abstract_tags(keys, prefix)
+      prefix = prefix.gsub(/^@/, '')
+      keys.select {|key| key =~ /#{Regexp.escape(prefix)}/}
+          .map {|key| key.match(/#{Regexp.escape(prefix)}(.*)/)[1]}
+          .first
     end
 
     def detect_feature_story(labels, example_or_group)

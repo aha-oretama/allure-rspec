@@ -36,7 +36,8 @@ And then include it in your spec_helper.rb:
 You can specify the directory where the Allure test results will appear. By default it would be 'gen/allure-results'
 within your current directory.  
 When you add a `feature_with_filename` option, the suites of the the Allure test results include file's name as a prefix.  
-This options is useful if you have some same feature names. Because Allure overwrites the same feature name's result if there are some same feature names.
+This options is useful if you have some same feature names. Because Allure overwrites the same feature name's result if there are some same feature names.  
+Allure_turnip will analyze your tags looking for Test Management, Issue Management. These will be displayed in the generated allure report (see allure-core for further info).
 
 ```ruby
     AllureTurnip.configure do |c|
@@ -44,6 +45,8 @@ This options is useful if you have some same feature names. Because Allure overw
       c.clean_dir = false # clean the output directory first? (default: true)
       c.logging_level = Logger::DEBUG # logging level (default: DEBUG)
       c.feature_with_filename = true # default: false
+      c.tms_prefix      = '@HIPTEST--' # default: '@TMS:'
+      c.issue_prefix    = '@JIRA++' # default: '@ISSUE:'
     end
 ```
 
@@ -56,6 +59,8 @@ The method attaches the file in the Allure result.
 **feature**
 ```ruby
 Feature: Attach File
+  @HIPTEST--1234
+  @JIRA++abc1234
   Scenario: This is an attaching file feature
     Given attach file
 ```

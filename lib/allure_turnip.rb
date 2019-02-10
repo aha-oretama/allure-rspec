@@ -10,14 +10,13 @@ require 'allure_turnip/turnip_extension'
 module AllureTurnip
   module Config
     class << self
-      attr_accessor :output_dir
-      attr_accessor :clean_dir
-      attr_accessor :logging_level
-      attr_accessor :feature_with_filename
+      attr_accessor :output_dir, :clean_dir, :logging_level, :feature_with_filename, :tms_prefix, :issue_prefix
 
       DEFAULT_OUTPUT_DIR = 'gen/allure-results'
       DEFAULT_LOGGING_LEVEL = Logger::DEBUG
       DEFAULT_FEATURE_WITH_FILENAME = false
+      DEFAULT_TMS_PREFIX      = '@TMS:'
+      DEFAULT_ISSUE_PREFIX    = '@ISSUE:'
 
       def output_dir
         @output_dir || DEFAULT_OUTPUT_DIR
@@ -33,6 +32,14 @@ module AllureTurnip
 
       def feature_with_filename?
         @feature_with_filename || DEFAULT_FEATURE_WITH_FILENAME
+      end
+
+      def tms_prefix
+        @tms_prefix || DEFAULT_TMS_PREFIX
+      end
+
+      def issue_prefix
+        @issue_prefix || DEFAULT_ISSUE_PREFIX
       end
     end
   end
