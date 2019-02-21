@@ -18,7 +18,7 @@ steps_for :step_calling do
   end
 
   step 'an invisible step call' do
-    step 'aaa this is an unimplemented step'
+    step 'this is an unimplemented step'
   end
 
   step 'a global step call' do
