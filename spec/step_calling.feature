@@ -5,6 +5,9 @@ Feature: Step-calling steps
   Scenario: when the called step is visible
     Given a visible step call
 
+  Scenario: when the called failed step is visible, this test should fail
+    Given a visible failed step call
+
   Scenario: when the called step is not visible
     Given an invisible step call
 
