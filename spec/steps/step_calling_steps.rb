@@ -8,8 +8,17 @@ steps_for :step_calling do
     @testing.should eq(123)
   end
 
+  step 'visible failed callee' do
+    @testing = 123
+    @testing.should eq(321)
+  end
+
+  step 'a visible failed step call' do
+    step 'visible failed callee'
+  end
+
   step 'an invisible step call' do
-    step 'this is an unimplemented step'
+    step 'aaa this is an unimplemented step'
   end
 
   step 'a global step call' do

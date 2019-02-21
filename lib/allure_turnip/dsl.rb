@@ -15,12 +15,18 @@ module AllureTurnip
 
       def allure_step(step, &block)
         begin
-          AllureRubyAdaptorApi::Builder.start_step(__suite, __test, step)
-          __with_step step, &block
-          AllureRubyAdaptorApi::Builder.stop_step(__suite, __test, step)
-        rescue Exception => e
-          AllureRubyAdaptorApi::Builder.stop_step(__suite, __test, step, :failed)
-          raise e
+          locked = __mutex.try_lock
+          if locked
+            @@__current_step = step
+            __with_allure_step(step, &block)
+          else
+            __with_step(step,&block)
+          end
+        ensure
+          if locked
+            @@__current_step = nil
+            __mutex.unlock
+          end
         end
       end
 
@@ -51,21 +57,21 @@ module AllureTurnip
         @@__mutex ||= Mutex.new
       end
 
-      def __with_step(step, &block)
+      def __with_allure_step(step, &block)
         begin
-          locked = __mutex.try_lock
-          if locked
-            @@__current_step = step
-            AllureTurnip.context.rspec.hooks.send :run, :before, :step, self
-            yield self
-          end
-        ensure
-          if locked
-            AllureTurnip.context.rspec.hooks.send :run, :after, :step, self
-            @@__current_step = nil
-            __mutex.unlock
-          end
+          AllureRubyAdaptorApi::Builder.start_step(__suite, __test, step)
+          __with_step(step, &block)
+          AllureRubyAdaptorApi::Builder.stop_step(__suite, __test, step)
+        rescue Exception => e
+          AllureRubyAdaptorApi::Builder.stop_step(__suite, __test, step, :failed)
+          raise e
         end
+      end
+
+      def __with_step(step, &block)
+        AllureTurnip.context.rspec.hooks.send :run, :before, :step, self
+        yield self
+        AllureTurnip.context.rspec.hooks.send :run, :after, :step, self
       end
     end
   end
