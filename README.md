@@ -16,6 +16,7 @@ Add the dependency to your Gemfile. Choose the version carefully:
 | Allure Turnip | Turnip |
 | ------------- | ------ |
 | >= 0.1.x | >= 3.0 |
+| >= 0.3.x | >= 4.0 |
 
 ```ruby
  gem 'allure_turnip'
