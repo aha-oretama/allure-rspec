@@ -38,10 +38,12 @@ module AllureTurnip
       private
 
       def __suite
+        parent_group = metadata[:example_group][:parent_example_group]
+        parent_group = parent_group.has_key?(:parent_example_group) ? parent_group[:parent_example_group] : parent_group
         if AllureTurnip::Config.feature_with_filename?
-          "#{File.split(metadata[:example_group][:parent_example_group][:file_path])[1]} -> #{metadata[:example_group][:parent_example_group][:description]}"
+          "#{File.split(parent_group[:file_path])[1]} -> #{parent_group[:description]}"
         else
-          metadata[:example_group][:parent_example_group][:description]
+          parent_group[:description]
         end
       end
 

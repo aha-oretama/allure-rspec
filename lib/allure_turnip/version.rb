@@ -1,5 +1,5 @@
 module AllureTurnip # :nodoc:
   module Version # :nodoc:
-    STRING = '0.2.1'
+    STRING = '0.3.0'
   end
 end

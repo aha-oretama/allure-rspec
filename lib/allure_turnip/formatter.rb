@@ -26,7 +26,7 @@ module AllureTurnip
     def example_group_finished(notification)
       return unless turnip?(notification)
 
-      if notification.group.examples.empty? # Feature has no examples
+      if suite?(notification.group)
         AllureRubyAdaptorApi::Builder.stop_suite(suite(notification.group))
       end
     end
@@ -34,9 +34,9 @@ module AllureTurnip
     def example_group_started(notification)
       return unless turnip?(notification)
 
-      if notification.group.examples.empty? # Feature has no examples
+      if suite?(notification.group)
         AllureRubyAdaptorApi::Builder.start_suite(suite(notification.group), labels(notification))
-      else # Scenario has examples
+      elsif test?(notification.group)
         suite = suite(notification.group)
         test = test(notification.group)
         AllureRubyAdaptorApi::Builder.start_test(suite, test, labels(notification))
@@ -87,12 +87,20 @@ module AllureTurnip
       )
     end
 
+    def suite?(group)
+      group.metadata[:scoped_id] == '1'
+    end
+
     def suite(group)
       if AllureTurnip::Config.feature_with_filename?
         "#{File.split(group.parent_groups.last.metadata[:file_path])[1]} -> #{group.parent_groups.last.description}"
       else
         group.parent_groups.last.description
       end
+    end
+
+    def test?(group)
+      !suite?(group) && !group.examples.empty?
     end
 
     def test(group)
