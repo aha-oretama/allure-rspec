@@ -1,14 +1,15 @@
 # -*- encoding: utf-8 -*-
-$LOAD_PATH.unshift File.expand_path("../lib", __FILE__)
-require "allure_turnip/version"
+$LOAD_PATH.unshift File.expand_path('../lib', __FILE__)
+require 'allure_turnip/version'
 
 Gem::Specification.new do |s|
+  s.required_ruby_version = '>= 2.3'
   s.name          = 'allure_turnip'
   s.version       = AllureTurnip::Version::STRING
   s.platform      = Gem::Platform::RUBY
   s.authors       = ['aha-oretama']
   s.email         = ['sekine_y_529@msn.com']
-  s.description   = %q{Adaptor to use Allure framework along with the Turnip}
+  s.description   = 'Adaptor to use Allure framework along with the Turnip'
   s.summary       = "allure_turnip-#{AllureTurnip::Version::STRING}"
   s.homepage      = 'https://github.com/aha-oretama/allure_turnip'
   s.license       = 'Apache-2.0'
@@ -18,8 +19,8 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ['lib']
 
-  s.add_dependency 'rspec', '~> 3.7'
   s.add_dependency 'allure-ruby-adaptor-api', '0.7.0'
+  s.add_dependency 'rspec', '~> 3.7'
   s.add_dependency 'turnip', '~> 4.0'
 
   s.add_development_dependency 'bundler'
