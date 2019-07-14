@@ -1,11 +1,13 @@
 Feature: Annotation
 
-  @HIPTEST--1234
-  @JIRA++abc123
+  @TEST-1234
+  @JIRA:abc123
+  @PRIORITY:critical
   Scenario: This is an annotation feature
     Given there is a monster
 
-  @HIPTEST--5678
-  @JIRA++abc567
+  @TEST-5678
+  @JIRA:abc567
+  @PRIORITY:trivial
   Scenario: This is an annotation feature2
     Given there is a monster

@@ -134,8 +134,10 @@ module AllureTurnip
       keys = metadata(example_or_group).keys
       testId = abstract_tags(keys, AllureTurnip::Config.tms_prefix)
       issue = abstract_tags(keys, AllureTurnip::Config.issue_prefix)
+      severity = abstract_tags(keys, AllureTurnip::Config.severity_prefix)
       labels[:testId] = testId if testId
       labels[:issue] = issue if issue
+      labels[:severity] = severity if severity
     end
 
     def abstract_tags(keys, prefix)

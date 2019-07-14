@@ -1,6 +1,6 @@
 # Allure Turnip
 
-[![Gem Version](https://badge.fury.io/rb/allure_turnip.svg)](http://badge.fury.io/rb/allure-rspec) [![Build Status](https://travis-ci.org/aha-oretama/allure_turnip.svg?branch=master)](https://travis-ci.org/aha-oretama/allure_turnip)
+[![Gem Version](https://badge.fury.io/rb/allure_turnip.svg)](https://badge.fury.io/rb/allure_turnip) [![Build Status](https://travis-ci.org/aha-oretama/allure_turnip.svg?branch=master)](https://travis-ci.org/aha-oretama/allure_turnip)
 
 Adaptor to use the Allure framework along with the [Turnip](https://github.com/jnicklas/turnip).
 
@@ -46,8 +46,9 @@ Allure_turnip will analyze your tags looking for Test Management, Issue Manageme
       c.clean_dir = false # clean the output directory first? (default: true)
       c.logging_level = Logger::DEBUG # logging level (default: DEBUG)
       c.feature_with_filename = true # default: false
-      c.tms_prefix      = '@HIPTEST--' # default: '@TMS:'
-      c.issue_prefix    = '@JIRA++' # default: '@ISSUE:'
+      c.tms_prefix      = '@TEST-' # default: '@TMS:'
+      c.issue_prefix    = '@JIRA:' # default: '@ISSUE:'
+      c.severity_prefix    = '@PRIORITY:' # default: '@SEVERITY:'
     end
 ```
 
@@ -60,8 +61,9 @@ The method attaches the file in the Allure result.
 **feature**
 ```ruby
 Feature: Attach File
-  @HIPTEST--1234
-  @JIRA++abc1234
+  @TEST-1234
+  @JIRA:abc1234
+  @PRIORITY:critical
   Scenario: This is an attaching file feature
     Given attach file
 ```

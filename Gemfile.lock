@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    allure_turnip (0.3.1)
+    allure_turnip (0.4.0)
       allure-ruby-adaptor-api (= 0.7.0)
       rspec (~> 3.7)
       turnip (~> 4.0)
