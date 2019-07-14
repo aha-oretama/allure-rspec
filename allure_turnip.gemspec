@@ -3,7 +3,7 @@ $LOAD_PATH.unshift File.expand_path('../lib', __FILE__)
 require 'allure_turnip/version'
 
 Gem::Specification.new do |s|
-  s.required_ruby_version = '>= 2.3'
+  s.required_ruby_version = '>= 2.4'
   s.name          = 'allure_turnip'
   s.version       = AllureTurnip::Version::STRING
   s.platform      = Gem::Platform::RUBY
