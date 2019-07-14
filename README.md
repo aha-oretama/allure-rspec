@@ -1,6 +1,6 @@
 # Allure Turnip
 
-[![Gem Version](https://badge.fury.io/rb/allure_turnip.svg)](http://badge.fury.io/rb/allure-rspec) [![Build Status](https://travis-ci.org/aha-oretama/allure_turnip.svg?branch=master)](https://travis-ci.org/aha-oretama/allure_turnip)
+[![Gem Version](https://badge.fury.io/rb/allure_turnip.svg)](https://badge.fury.io/rb/allure_turnip) [![Build Status](https://travis-ci.org/aha-oretama/allure_turnip.svg?branch=master)](https://travis-ci.org/aha-oretama/allure_turnip)
 
 Adaptor to use the Allure framework along with the [Turnip](https://github.com/jnicklas/turnip).
 
